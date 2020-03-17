@@ -1,0 +1,46 @@
+﻿@page
+@model Crisis.Pages.Statuses.IndexModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        <a asp-page="Create" class="btn btn-success">Create New</a>
+        <a asp-page="Index" asp-route-all="@true" class="btn btn-dark">Hidden</a>
+    </p>
+<table id="table" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status[0].Hint)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Status)
+        {
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Description)</a>
+</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hint)
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Hide</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+</body>
+</html>

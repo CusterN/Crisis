@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Crisis.Data;
+using Crisis.Models;
+
+namespace Crisis
+{
+    public class DetailsModel : PageModel
+    {
+        private readonly Crisis.Data.CrisisContext _context;
+
+        public DetailsModel(Crisis.Data.CrisisContext context)
+        {
+            _context = context;
+        }
+
+        public Supplier Supplier { get; set; }
+        public IList<Comment> Comment { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Supplier = await _context.Supplier
+                .Include(s => s.Status)
+                .Include(c=> c.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            Comment = await _context.Comment.Where(c => c.SupplierId == id).OrderByDescending(c => c.CreateDate).ToListAsync();
+
+            if (Supplier == null)
+            {
+                return NotFound();
+            }
+            return Page();
+        }
+    }
+}
