@@ -22,19 +22,17 @@ namespace Crisis
             _context = context;
             _externalcontext = externalcontext;
         }
-        //public IList<Supplier> Suppliers { get;set; }
-        //public IList<Models.ExternalData.VwSrmAhmSupplier> VwSrmAhmSuppliers { get; set; }
         public IList<SupplierDetail> SupplierDetails { get; set; }
 
-        public async Task OnGetAsync(Boolean? All)
+        public async Task OnGetAsync(bool Visible = true)
         {
-            await SetModel(All);
+            await SetModel(Visible);
         }
                 
         public async Task<IActionResult> OnPostExport()
         {
             // Name of file
-            string sFileName = @"PartQueueRequests.xlsx";
+            string sFileName = @"CrisisSuppliers.xlsx";
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (ExcelPackage pck = new ExcelPackage())
             {
@@ -63,7 +61,11 @@ namespace Crisis
                     ws.Cells[recordIndex, 4].Value = item.Supplier.Creator;
                     ws.Cells[recordIndex, 5].Value = item.Supplier.Category.Description;
                     ws.Cells[recordIndex, 6].Value = item.Supplier.Status.Description;
-                    ws.Cells[recordIndex, 7].Value = item.Supplier.Comments.Last().Body;
+                    if(item.Supplier.Comments.Count > 0)
+                    {
+                        ws.Cells[recordIndex, 7].Value = item.Supplier.Comments.LastOrDefault().Body;
+                    }
+                    
                     recordIndex++;
                 }
 
@@ -72,30 +74,19 @@ namespace Crisis
             }
         }
 
-        private async Task SetModel(bool? All)
+        private async Task SetModel(bool Visible)
         {
             List<Supplier> Suppliers = new List<Supplier>();
             List<Models.ExternalData.VwSrmAhmSupplier> VwSrmAhmSuppliers = new List< Models.ExternalData.VwSrmAhmSupplier> ();
-            //don't show all records unless explicity asked to!
-            if (All == true)
-            {
-                Suppliers = await _context.Supplier
-                    .Include(s => s.Status)
-                    .Include(c => c.Category)
-                    .Include(c => c.Comments)
-                    .OrderByDescending(c => c.CreateDate)
-                    .ToListAsync();
-            }
-            else
-            {
-                Suppliers = await _context.Supplier
-                    .Include(s => s.Status)
-                    .Include(c => c.Category)
-                    .Include(c => c.Comments)
-                    .OrderByDescending(c => c.CreateDate)
-                    .Where(m => m.Visible == true)
-                    .ToListAsync();
-            }
+
+            Suppliers = await _context.Supplier
+                .Include(s => s.Status)
+                .Include(c => c.Category)
+                .Include(c => c.Comments)
+                .OrderByDescending(c => c.CreateDate)
+                .Where(m => m.Visible == Visible)
+                .ToListAsync();
+
             var supplierNos = Suppliers.Select(s => s.SupplierNo).ToList();
 
             VwSrmAhmSuppliers = await _externalcontext.VwSrmAhmSuppliers
