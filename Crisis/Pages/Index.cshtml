@@ -21,48 +21,54 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Supplier[0].SupplierNo)
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.SupplierNo)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Supplier[0].CreateDate)
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].VwSrmAhmSupplier.AhmSupplierNm)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Supplier[0].Creator)
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.CreateDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Supplier[0].Category)
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Creator)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Supplier[0].Status)
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Status)
                 </th>
 
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Supplier)
-        {
+            @foreach (var item in Model.SupplierDetails)
+            {
             <tr>
                 <td>
-                    <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.SupplierNo)</a>
+                    <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
+                    @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Creator)
+                    @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Category.Description)
+                    @Html.DisplayFor(modelItem => item.Supplier.Creator)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status.Description)
+                    @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
                 </td>
                 <td>
-                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Hide</a>
+                    @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.Supplier.Id" class="btn btn-danger">Hide</a>
                 </td>
             </tr>
-        }
+            }
         </tbody>
     </table>
 </body>

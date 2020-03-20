@@ -29,6 +29,9 @@ namespace Crisis
 
             services.AddDbContext<CrisisContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CrisisContext")));
+            services.AddDbContext<ExternalContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ExternalContext")));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
