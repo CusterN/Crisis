@@ -21,23 +21,14 @@ namespace Crisis.Pages.Comments
 
         public IList<Comment> Comment { get;set; }
 
-        public async Task OnGetAsync(Boolean? All)
+        public async Task OnGetAsync(bool Visible = true)
         {
-            if(All == true)
-            {
-                Comment = await _context.Comment
-                    .Include(c => c.Supplier)
-                    .OrderByDescending(c => c.CreateDate)
-                    .ToListAsync();
-            } 
-            else
-            {
-                Comment = await _context.Comment
-                    .Include(c => c.Supplier)
-                    .Where(m => m.Visible == true && m.Supplier.Visible == true)
-                    .OrderByDescending(c => c.CreateDate)
-                    .ToListAsync();
-            }
+
+            Comment = await _context.Comment
+                .Include(c => c.Supplier)
+                .Where(m => m.Visible == Visible && m.Supplier.Visible == Visible)
+                .OrderByDescending(c => c.CreateDate)
+                .ToListAsync();
 
         }
     }

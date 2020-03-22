@@ -8,6 +8,8 @@
     <!-- Page level plugin CSS-->
     <link href="~/lib/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!--datatables javascript must run here to work-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/lib/datatables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -22,9 +24,16 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <p class="nav navbar-text navbar-right">Hello, @User.Identity.Name!</p>
+                    <a href="https://github.com/CusterN/Crisis" target="_blank" class="nav-link text-dark navbar-right">GitHub</a>
+                    <a href="http://troahmdjk5rch2.am.mds.honda.com/Story" target="_blank" class="nav-link text-dark navbar-right">Story</a>
+                    <a href="http://troahmdjk5rch2.am.mds.honda.com/sppcwebprod" target="_blank" class="nav-link text-dark navbar-right">SPPCWeb</a>
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Comments/Index">Comments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.worldometers.info/coronavirus/" target="_blank" class="nav-link text-dark">COVID-19</a>
                         </li>
                     </ul>
                 </div>
@@ -43,9 +52,9 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
 
     @RenderSection("Scripts", required: false)
 </body>
