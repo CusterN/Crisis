@@ -20,12 +20,18 @@ namespace Crisis.Data
 
         public DbSet<Crisis.Models.Status> Status { get; set; }
 
+        public DbSet<Crisis.Models.Category> Category { get; set; }
+
+        public DbSet<Crisis.Models.Attachment> Attachment { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Supplier>()
                 .HasAlternateKey(s => s.SupplierNo);
+            modelBuilder.Entity<Attachment>()
+                .HasAlternateKey(s => s.SupplierId);
         }
 
-        public DbSet<Crisis.Models.Category> Category { get; set; }
+        
     }
 }

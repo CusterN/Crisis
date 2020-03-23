@@ -63,19 +63,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Comment[0].CreateDate)
+                    @Html.DisplayNameFor(model => model.Supplier.Comments[0].CreateDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Comment[0].Creator)
+                    @Html.DisplayNameFor(model => model.Supplier.Comments[0].Creator)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Comment[0].Body)
+                    @Html.DisplayNameFor(model => model.Supplier.Comments[0].Body)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Comment)
+            @foreach (var item in Model.Supplier.Comments)
             {
                 <tr>
                     <td>
