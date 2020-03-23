@@ -20,7 +20,6 @@ namespace Crisis
         }
 
         public Supplier Supplier { get; set; }
-        public IList<Comment> Comment { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,8 +31,8 @@ namespace Crisis
             Supplier = await _context.Supplier
                 .Include(s => s.Status)
                 .Include(c=> c.Category)
+                .Include(c => c.Comments)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            Comment = await _context.Comment.Where(c => c.SupplierId == id).OrderByDescending(c => c.CreateDate).ToListAsync();
 
             if (Supplier == null)
             {
