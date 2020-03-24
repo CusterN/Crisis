@@ -65,8 +65,7 @@ namespace Crisis.Migrations
                         .HasMaxLength(60);
 
                     b.Property<int>("SupplierId")
-                        .HasColumnType("int")
-                        .HasMaxLength(6);
+                        .HasColumnType("int");
 
                     b.Property<bool>("Visible")
                         .HasColumnType("bit");

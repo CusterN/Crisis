@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crisis.Migrations
 {
     [DbContext(typeof(CrisisContext))]
-    [Migration("20200316145116_AddingCategoryAndHints")]
-    partial class AddingCategoryAndHints
+    [Migration("20200324002011_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,11 +30,16 @@ namespace Crisis.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Hint")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<bool>("Visible")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -50,17 +55,22 @@ namespace Crisis.Migrations
 
                     b.Property<string>("Body")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Visible")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -78,11 +88,16 @@ namespace Crisis.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Hint")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<bool>("Visible")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -104,14 +119,19 @@ namespace Crisis.Migrations
 
                     b.Property<string>("Creator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("SupplierNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(6)")
+                        .HasMaxLength(6);
+
+                    b.Property<bool>("Visible")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

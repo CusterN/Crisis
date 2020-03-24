@@ -17,7 +17,6 @@ namespace Crisis.Models
         [Required] public Boolean Visible { get; set; }
         
         public List<Comment> Comments { get; set; }
-        public List<Attachment> Attachments { get; set; }
         
         [Required] public int StatusId { get; set; }
         public virtual Status Status { get; set; }
