@@ -9,5 +9,6 @@ namespace Crisis.Models
     {
         public Supplier Supplier { get; set; }
         public Models.ExternalData.VwSrmAhmSupplier VwSrmAhmSupplier { get;set;}
+        public Models.ExternalData.VwSrmDeliveryPrimary VwSrmDeliveryPrimary { get; set; }
     }
 }

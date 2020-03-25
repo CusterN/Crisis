@@ -18,6 +18,7 @@ namespace Crisis.Data
         }
 
         public virtual DbSet<VwSrmAhmSupplier> VwSrmAhmSuppliers { get; set; }
+        public virtual DbSet<VwSrmDeliveryPrimary> VwSrmDeliveryPrimaries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -80,6 +81,33 @@ namespace Crisis.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+            modelBuilder.Entity<VwSrmDeliveryPrimary>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_srm_delivery_primary");
+
+                entity.Property(e => e.AhmSupplierNo)
+                    .HasColumnName("AHM_Supplier_No")
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PortalLoginId)
+                    .HasColumnName("Portal_Login_ID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RoleAdminGroup)
+                    .HasColumnName("Role_Admin_Group")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RoleAdminSubGroup)
+                    .HasColumnName("Role_Admin_Sub_Group")
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+            });
+
             OnModelCreatingPartial(modelBuilder);
 
         }

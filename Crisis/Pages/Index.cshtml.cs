@@ -32,6 +32,7 @@ namespace Crisis
         {
             List<Supplier> Suppliers = new List<Supplier>();
             List<Models.ExternalData.VwSrmAhmSupplier> VwSrmAhmSuppliers = new List< Models.ExternalData.VwSrmAhmSupplier> ();
+            List<Models.ExternalData.VwSrmDeliveryPrimary> VwSrmDeliveryPrimaries = new List<Models.ExternalData.VwSrmDeliveryPrimary>();
 
             Suppliers = await _context.Supplier
                 .Include(s => s.Status)
@@ -46,6 +47,9 @@ namespace Crisis
             VwSrmAhmSuppliers = await _externalcontext.VwSrmAhmSuppliers
                 .Where(v => supplierNos
                     .Any(s => s == v.AhmSupplierNo)).ToListAsync();
+            VwSrmDeliveryPrimaries = await _externalcontext.VwSrmDeliveryPrimaries
+                .Where(v => supplierNos
+                    .Any(s => s == v.AhmSupplierNo)).ToListAsync();
 
             SupplierDetails = new List<SupplierDetail>();
 
@@ -54,7 +58,8 @@ namespace Crisis
                 SupplierDetail supplierDetail = new SupplierDetail
                 {
                     Supplier = supplier,
-                    VwSrmAhmSupplier = VwSrmAhmSuppliers.Where(s => s.AhmSupplierNo == supplier.SupplierNo).First()
+                    VwSrmAhmSupplier = VwSrmAhmSuppliers.Where(s => s.AhmSupplierNo == supplier.SupplierNo).FirstOrDefault(),
+                    VwSrmDeliveryPrimary = VwSrmDeliveryPrimaries.Where(s => s.AhmSupplierNo == supplier.SupplierNo).FirstOrDefault()
                 };
                 SupplierDetails.Add(supplierDetail);
             }

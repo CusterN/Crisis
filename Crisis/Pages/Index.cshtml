@@ -29,7 +29,7 @@
                     @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.CreateDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Creator)
+                    Delivery Primary
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Category)
@@ -58,7 +58,7 @@
                     @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Creator)
+                    @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
