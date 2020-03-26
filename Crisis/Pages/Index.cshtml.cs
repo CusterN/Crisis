@@ -39,6 +39,7 @@ namespace Crisis
                 .Include(s => s.Category)
                 .Include(s => s.Comments)
                 .Include(s => s.Calls)
+                .Include("Calls.CallResponse")
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
 

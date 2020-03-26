@@ -33,6 +33,7 @@ namespace Crisis
                 .Include(c=> c.Category)
                 .Include(c => c.Comments)
                 .Include(c => c.Calls)
+                .Include("Calls.CallResponse")
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Supplier == null)
