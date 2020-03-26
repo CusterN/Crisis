@@ -21,19 +21,10 @@ namespace Crisis.Pages.Categories
 
         public IList<Category> Category { get;set; }
 
-        public async Task OnGetAsync(Boolean? All)
+        public async Task OnGetAsync()
         {
-            if(All == true)
-            {
-                Category = await _context.Category
-                    .ToListAsync();
-            }
-            else
-            {
-                Category = await _context.Category
-                    .Where(m=>m.Visible == true)
-                    .ToListAsync();
-            }
+
+            Category = await _context.Category.ToListAsync();
             
         }
     }

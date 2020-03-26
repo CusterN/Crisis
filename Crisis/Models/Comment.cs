@@ -12,7 +12,6 @@ namespace Crisis.Models
         [Required] [MaxLength(450)] public string Body { get; set; }
         [Required] [MaxLength(60)] public string Creator { get; set; }
         [Required] public DateTime CreateDate { get; set; }
-        [Required] public Boolean Visible { get; set; }
 
         [Required] public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }

@@ -15,7 +15,6 @@ namespace Crisis.Models
         [Required] public DateTime CreateDate { get; set;}
         [Required] [MaxLength(60)] public string Creator { get; set; }
         public DateTime? ReopenDate { get; set; }
-        [Required] public Boolean Visible { get; set; }
         
         public List<Comment> Comments { get; set; }
 

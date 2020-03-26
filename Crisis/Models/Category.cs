@@ -11,7 +11,6 @@ namespace Crisis.Models
         [Key] public int Id { get; set; }
         [Required] [MaxLength(20)] public string Description { get; set; }
         [Required] [MaxLength(450)] public string Hint { get; set; }
-        [Required] public Boolean Visible { get; set; }
 
         public List<Supplier> Suppliers { get; set; }
     }

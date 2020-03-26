@@ -53,7 +53,6 @@ namespace Crisis
                 CreateDate = Supplier.CreateDate,
                 Creator = Supplier.Creator,
                 Body = Comment,
-                Visible = Supplier.Visible
             };
 
             _context.Comment.Add(newComment);

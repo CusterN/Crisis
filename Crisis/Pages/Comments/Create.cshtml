@@ -35,11 +35,6 @@
                 <textarea asp-for="Comment.Body" class="form-control"></textarea>
                 <span asp-validation-for="Comment.Body" class="text-danger"></span>
             </div>
-            <div hidden class="form-group">
-                <label asp-for="Comment.Visible" class="control-label"></label>
-                <input type="checkbox" asp-for="Comment.Visible" class="form-control" checked />
-                <span asp-validation-for="Comment.Visible" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-success" />
             </div>

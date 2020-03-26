@@ -29,9 +29,7 @@ namespace Crisis.Pages.Statuses
             } 
             else
             {
-                Status = await _context.Status
-                    .Where(m => m.Visible == true)
-                    .ToListAsync();
+                Status = await _context.Status.ToListAsync();
             }
             
         }

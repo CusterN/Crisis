@@ -21,12 +21,11 @@ namespace Crisis.Pages.Comments
 
         public IList<Comment> Comment { get;set; }
 
-        public async Task OnGetAsync(bool Visible = true)
+        public async Task OnGetAsync()
         {
 
             Comment = await _context.Comment
                 .Include(c => c.Supplier)
-                .Where(m => m.Visible == Visible && m.Supplier.Visible == Visible)
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
 
