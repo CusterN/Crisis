@@ -21,8 +21,8 @@ namespace Crisis
 
         public IActionResult OnGet()
         {
-        ViewData["StatusId"] = new SelectList(_context.Set<Status>(), "Id", "Description");
-        ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Description");
+            ViewData["StatusId"] = new SelectList(_context.Set<Status>(), "Id", "Description");
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Description");
             return Page();
         }
 

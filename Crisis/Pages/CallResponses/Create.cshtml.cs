@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Crisis.Data;
 using Crisis.Models;
 
-namespace Crisis.Pages.Comments
+namespace Crisis.Pages.CallResponses
 {
     public class CreateModel : PageModel
     {
@@ -19,22 +19,13 @@ namespace Crisis.Pages.Comments
             _context = context;
         }
 
-        public IActionResult OnGet(int? SupplierId)
+        public IActionResult OnGet()
         {
-            if (SupplierId == null)
-            {
-                ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "SupplierNo");
-            }
-            else
-            {
-                //limit the Supplier to be the one you came in with.
-                ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "SupplierNo", SupplierId);
-            }
             return Page();
         }
 
         [BindProperty]
-        public Comment Comment { get; set; }
+        public CallResponse CallResponse { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -45,10 +36,10 @@ namespace Crisis.Pages.Comments
                 return Page();
             }
 
-            _context.Comment.Add(Comment);
+            _context.CallResponse.Add(CallResponse);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("../Details", new { Id = Comment.SupplierId });
+            return RedirectToPage("./Index");
         }
     }
 }

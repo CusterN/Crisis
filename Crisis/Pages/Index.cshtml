@@ -47,39 +47,50 @@
         <tbody>
             @foreach (var item in Model.SupplierDetails)
             {
-            <tr>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
-                </td>
-                <td>
-                    <a asp-page="./Delete" asp-route-id="@item.Supplier.Id" class="btn btn-danger">Hide</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
+                    </td>
+                    <td>
+                        <font size="4">
+                            <a style="color:#5cb85c" asp-page="Calls/Create" data-toggle="tooltip" data-placement="top" title="Add a call" asp-route-id="@item.Supplier.Id" class="fas fa-phone-square"></a>
+                        </font>
+                        <font size="4">
+                            <a style="color:#5cb85c" asp-page="Comments/Create" data-toggle="tooltip" data-placement="top" title="Add a comment"  asp-route-id="@item.Supplier.Id" class="fas fa-comment-alt"></a>
+                        </font>
+                        <font size="4">
+                            <a style="color:#5cb85c" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier"  asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
+                        </font>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </body>
 </html>
-
 <script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
     $(document).ready(function () {
         $('#SupplierTable').dataTable({
             searching: true,
@@ -90,7 +101,7 @@
             pageLength: 5,
             dom: 'Bfrtip',
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-            "columnDefs": [{ "type": "date", "targets": 2 }] 
+            "columnDefs": [{ "type": "date", "targets": 2 }]
         });
     });
 </script>

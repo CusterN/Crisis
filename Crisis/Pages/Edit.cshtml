@@ -43,9 +43,9 @@
                 <span asp-validation-for="Supplier.StatusId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Supplier.Visible" class="control-label"></label>
-                <input type="checkbox" asp-for="Supplier.Visible" class="form-control"/>
-                <span asp-validation-for="Supplier.Visible" class="text-danger"></span>
+                <label asp-for="Supplier.ReopenDate" class="control-label"></label>
+                <input asp-for="Supplier.ReopenDate" class="form-control" type="date"/>
+                <span asp-validation-for="Supplier.ReopenDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-warning" />

@@ -1,0 +1,59 @@
+﻿@page
+@model Crisis.Pages.Calls.CreateModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>Call</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Call.Creator" class="control-label"></label>
+                <input asp-for="Call.Creator" value="@User.Identity.Name" class="form-control" />
+                <span asp-validation-for="Call.Creator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Call.CreateDate" class="control-label"></label>
+                <input asp-for="Call.CreateDate" type="datetime" value="@DateTime.Now" class="form-control" />
+                <span asp-validation-for="Call.CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Call.Contact" class="control-label"></label>
+                <input asp-for="Call.Contact" class="form-control" />
+                <span asp-validation-for="Call.Contact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Call.Body" class="control-label"></label>
+                <textarea asp-for="Call.Body" class="form-control"></textarea>
+                <span asp-validation-for="Call.Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a asp-page="./CallResponses/Index" style="margin-left:5px;">Call Response</a>
+                <select asp-for="Call.CallResponseId" class ="form-control" asp-items="ViewBag.CallResponseId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Call.SupplierId" class="control-label"></label>
+                <select asp-for="Call.SupplierId" class ="form-control" asp-items="ViewBag.SupplierId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+</body>
+</html>

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Crisis.Data;
 using Crisis.Models;
 
-namespace Crisis
+namespace Crisis.Pages.CallResponses
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Crisis
             _context = context;
         }
 
-        public Supplier Supplier { get; set; }
+        public CallResponse CallResponse { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,9 @@ namespace Crisis
                 return NotFound();
             }
 
-            Supplier = await _context.Supplier
-                .Include(s => s.Status)
-                .Include(c=> c.Category)
-                .Include(c => c.Comments)
-                .Include(c => c.Calls)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            CallResponse = await _context.CallResponse.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Supplier == null)
+            if (CallResponse == null)
             {
                 return NotFound();
             }

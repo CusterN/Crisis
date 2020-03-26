@@ -22,6 +22,10 @@ namespace Crisis.Data
 
         public DbSet<Crisis.Models.Category> Category { get; set; }
 
+        public DbSet<Crisis.Models.Call> Call { get; set; }
+
+        public DbSet<Crisis.Models.CallResponse> CallResponse { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Supplier>()

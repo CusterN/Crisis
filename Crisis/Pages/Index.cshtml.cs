@@ -23,12 +23,12 @@ namespace Crisis
         }
         public IList<SupplierDetail> SupplierDetails { get; set; }
 
-        public async Task OnGetAsync(bool Visible = true)
+        public async Task OnGetAsync()
         {
-            await SetModel(Visible);
+            await SetModel();
         }
                 
-        private async Task SetModel(bool Visible)
+        private async Task SetModel()
         {
             List<Supplier> Suppliers = new List<Supplier>();
             List<Models.ExternalData.VwSrmAhmSupplier> VwSrmAhmSuppliers = new List< Models.ExternalData.VwSrmAhmSupplier> ();
@@ -39,7 +39,6 @@ namespace Crisis
                 .Include(c => c.Category)
                 .Include(c => c.Comments)
                 .OrderByDescending(c => c.CreateDate)
-                .Where(m => m.Visible == Visible)
                 .ToListAsync();
 
             var supplierNos = Suppliers.Select(s => s.SupplierNo).ToList();
