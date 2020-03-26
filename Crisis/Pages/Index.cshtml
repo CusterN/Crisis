@@ -71,10 +71,10 @@
                     </td>
                     <td>
                         <font size="4">
-                            <a style="color:#5cb85c" asp-page="Calls/Create" data-toggle="tooltip" data-placement="top" title="Add a call" asp-route-id="@item.Supplier.Id" class="fas fa-phone-square"></a>
+                            <a style="color:#5cb85c" asp-page="Calls/Create" data-toggle="tooltip" data-placement="top" title="Add a call" asp-route-SupplierId="@item.Supplier.Id" class="fas fa-phone-square"></a>
                         </font>
                         <font size="4">
-                            <a style="color:#5cb85c" asp-page="Comments/Create" data-toggle="tooltip" data-placement="top" title="Add a comment"  asp-route-id="@item.Supplier.Id" class="fas fa-comment-alt"></a>
+                            <a style="color:#5cb85c" asp-page="Comments/Create" data-toggle="tooltip" data-placement="top" title="Add a comment"  asp-route-SupplierId="@item.Supplier.Id" class="fas fa-comment-alt"></a>
                         </font>
                         <font size="4">
                             <a style="color:#5cb85c" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier"  asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
@@ -87,10 +87,6 @@
 </body>
 </html>
 <script type="text/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-
     $(document).ready(function () {
         $('#SupplierTable').dataTable({
             searching: true,
