@@ -37,7 +37,7 @@
                 <span asp-validation-for="Call.Body" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <a asp-page="CallResponses/Index" style="margin-left:5px;">Call Response</a>
+                <a asp-page="../CallResponses/Index" style="margin-left:5px;">Call Response</a>
                 <select asp-for="Call.CallResponseId" class ="form-control" asp-items="ViewBag.CallResponseId"></select>
             </div>
             <div class="form-group">

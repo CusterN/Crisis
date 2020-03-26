@@ -36,8 +36,9 @@ namespace Crisis
 
             Suppliers = await _context.Supplier
                 .Include(s => s.Status)
-                .Include(c => c.Category)
-                .Include(c => c.Comments)
+                .Include(s => s.Category)
+                .Include(s => s.Comments)
+                .Include(s => s.Calls)
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
 
