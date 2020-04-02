@@ -15,7 +15,7 @@
             <a asp-page="Index" asp-route-all="@true" class="btn btn-dark">Hidden</a>
         </p>
     </div>
-
+    @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
     <table id="SupplierTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -52,42 +52,43 @@
         <tbody>
             @foreach (var item in Model.SupplierDetails)
             {
-            <tr>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.Calls.LastOrDefault().CallResponse.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.ReopenDate)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
-                </td>
-                <td>
-                    <font size="5">
-                        <a style="color:#5cb85c" asp-page="Calls/Create" data-toggle="tooltip" data-placement="top" title="Add a call" asp-route-SupplierId="@item.Supplier.Id" class="fas fa-phone-square"></a>
-                        <a style="color:#5cb85c" asp-page="Comments/Create" data-toggle="tooltip" data-placement="top" title="Add a comment" asp-route-SupplierId="@item.Supplier.Id" class="fas fa-comment-alt"></a>
-                        <a style="color:#f0ad4e" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier" asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
-                    </font>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Calls.LastOrDefault().CallResponse.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.ReopenDate)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
+                    </td>
+                    <td>
+                        <font size="5">
+                            <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal"  class="fas fa-phone-square"></a>
+                            <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fas fa-comment-alt"></a>
+                            <a style="color:#f0ad4e" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier" asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
+                            <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fas fa-paperclip"></a>
+                        </font>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -107,4 +108,148 @@
             "columnDefs": [{ "type": "date", "targets": 2 }]
         });
     });
+
+    //map the data-id fields to the objects
+    $(document).ready(function () {
+        $('a[data-toggle=modal], button[data-toggle=modal]').click(function () {
+            var data_id = '';
+            if (typeof $(this).data('id') !== 'undefined') {
+                data_id = $(this).data('id');
+            }
+            $('#AttachmentSupplier').val(data_id);
+            $('#CallSupplier').val(data_id);
+            $('#CommentSupplier').val(data_id);
+        })
+    });
 </script>
+
+<!-- AddAttachment -->
+<div class="modal fade" id="AttachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Attachment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div hidden class="form-group">
+                        <label asp-for="Attachment.SupplierId" class="control-label"></label>
+                        <input asp-for="Attachment.SupplierId" id="AttachmentSupplier" class="form-control" />
+                        <span asp-validation-for="Attachment.SupplierId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Attachment.AttachmentTypeId" class="control-label"></label>
+                        <select asp-for="Attachment.AttachmentTypeId" class="form-control" asp-items="ViewBag.AttachmentType"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" asp-for="FileAttached" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" asp-page-handler="CreateAttachment" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- AddComment -->
+<div class="modal fade" id="CommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div hidden class="form-group">
+                        <label asp-for="Comment.CreateDate" class="control-label"></label>
+                        <input asp-for="Comment.CreateDate" type="datetime" value="@DateTime.Now" class="form-control" />
+                        <span asp-validation-for="Comment.CreateDate" class="text-danger"></span>
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Comment.Creator" class="control-label"></label>
+                        <input readonly asp-for="Comment.Creator" value="@User.Identity.Name" class="form-control" />
+                        <span asp-validation-for="Comment.Creator" class="text-danger"></span>
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Comment.SupplierId" class="control-label"></label>
+                        <input asp-for="Comment.SupplierId" id="CommentSupplier" class="form-control" />
+                        <span asp-validation-for="Comment.SupplierId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comment.Body" class="control-label"></label>
+                        <textarea asp-for="Comment.Body" class="form-control"></textarea>
+                        <span asp-validation-for="Comment.Body" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" asp-page-handler="CreateComment" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- AddCall -->
+<div class="modal fade" id="CallModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Call</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div hidden class="form-group">
+                        <label asp-for="Call.Creator" class="control-label"></label>
+                        <input asp-for="Call.Creator" value="@User.Identity.Name" class="form-control" />
+                        <span asp-validation-for="Call.Creator" class="text-danger"></span>
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Call.CreateDate" class="control-label"></label>
+                        <input asp-for="Call.CreateDate" type="datetime" value="@DateTime.Now" class="form-control" />
+                        <span asp-validation-for="Call.CreateDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Call.Contact" class="control-label"></label>
+                        <input asp-for="Call.Contact" class="form-control" />
+                        <span asp-validation-for="Call.Contact" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Call.Body" class="control-label"></label>
+                        <textarea asp-for="Call.Body" class="form-control"></textarea>
+                        <span asp-validation-for="Call.Body" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <a asp-page="../CallResponses/Index" style="margin-left:5px;">Call Response</a>
+                        <select asp-for="Call.CallResponseId" class="form-control" asp-items="ViewBag.CallResponse"></select>
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Call.SupplierId" class="control-label"></label>
+                        <input asp-for="Call.SupplierId" id="CallSupplier" class="form-control" />
+                        <span asp-validation-for="Call.SupplierId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" asp-page-handler="CreateCall"  class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,14 +4,16 @@ using Crisis.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crisis.Migrations
 {
     [DbContext(typeof(CrisisContext))]
-    partial class CrisisContextModelSnapshot : ModelSnapshot
+    [Migration("20200401191714_AttachmentDetails")]
+    partial class AttachmentDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,46 +28,24 @@ namespace Crisis.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AttachmentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FilePath")
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<string>("FileTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AttachmentTypeId");
-
                     b.HasIndex("SupplierId");
 
                     b.ToTable("Attachment");
-                });
-
-            modelBuilder.Entity("Crisis.Models.AttachmentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Hint")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AttachmentType");
                 });
 
             modelBuilder.Entity("Crisis.Models.Call", b =>
@@ -246,12 +226,6 @@ namespace Crisis.Migrations
 
             modelBuilder.Entity("Crisis.Models.Attachment", b =>
                 {
-                    b.HasOne("Crisis.Models.AttachmentType", "AttachmentType")
-                        .WithMany("Attachments")
-                        .HasForeignKey("AttachmentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Crisis.Models.Supplier", "Supplier")
                         .WithMany("Attachments")
                         .HasForeignKey("SupplierId")

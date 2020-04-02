@@ -17,6 +17,10 @@
     <Compile Remove="Migrations\20200325221647_AddCallandCallResponse.Designer.cs" />
     <Compile Remove="Migrations\20200325234148_AddCallsToSupplier.cs" />
     <Compile Remove="Migrations\20200325234148_AddCallsToSupplier.Designer.cs" />
+    <Compile Remove="Migrations\20200330164349_AddingAttachmentClass.cs" />
+    <Compile Remove="Migrations\20200330164349_AddingAttachmentClass.Designer.cs" />
+    <Compile Remove="Migrations\20200330164508_AddingAttachmentClass.cs" />
+    <Compile Remove="Migrations\20200330164508_AddingAttachmentClass.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

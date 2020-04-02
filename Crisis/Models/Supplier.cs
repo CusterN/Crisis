@@ -20,6 +20,8 @@ namespace Crisis.Models
 
         public List<Call> Calls { get; set; }
 
+        public List<Attachment> Attachments { get; set; }
+
         [Required] public int StatusId { get; set; }
         public virtual Status Status { get; set; }
 

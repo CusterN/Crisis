@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Crisis.Data;
 using Crisis.Models;
 
-namespace Crisis
+namespace Crisis.Pages.AttachmentTypes
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Crisis
             _context = context;
         }
 
-        public Supplier Supplier { get; set; }
+        public AttachmentType AttachmentType { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,17 +28,9 @@ namespace Crisis
                 return NotFound();
             }
 
-            Supplier = await _context.Supplier
-                .Include(s => s.Status)
-                .Include(c=> c.Category)
-                .Include(c => c.Comments)
-                .Include(c => c.Calls)
-                .Include("Calls.CallResponse")
-                .Include(c=> c.Attachments)
-                .Include("Attachments.AttachmentType")
-                .FirstOrDefaultAsync(m => m.Id == id);
+            AttachmentType = await _context.AttachmentType.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Supplier == null)
+            if (AttachmentType == null)
             {
                 return NotFound();
             }

@@ -4,14 +4,16 @@ using Crisis.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crisis.Migrations
 {
     [DbContext(typeof(CrisisContext))]
-    partial class CrisisContextModelSnapshot : ModelSnapshot
+    [Migration("20200401192739_AddingAttachmentType")]
+    partial class AddingAttachmentType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,10 +31,15 @@ namespace Crisis.Migrations
                     b.Property<int>("AttachmentTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FilePath")
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<string>("FileTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");

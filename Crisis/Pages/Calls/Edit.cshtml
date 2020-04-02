@@ -10,53 +10,55 @@
 </head>
 <body>
 
-<h4>Call</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Call.Id" />
-            <div class="form-group">
-                <label asp-for="Call.Creator" class="control-label"></label>
-                <input asp-for="Call.Creator" class="form-control" />
-                <span asp-validation-for="Call.Creator" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Call.CreateDate" class="control-label"></label>
-                <input asp-for="Call.CreateDate" class="form-control" />
-                <span asp-validation-for="Call.CreateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Call.Contact" class="control-label"></label>
-                <input asp-for="Call.Contact" class="form-control" />
-                <span asp-validation-for="Call.Contact" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Call.Body" class="control-label"></label>
-                <input asp-for="Call.Body" class="form-control" />
-                <span asp-validation-for="Call.Body" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Call.CallResponseId" class="control-label"></label>
-                <select asp-for="Call.CallResponseId" class="form-control" asp-items="ViewBag.CallResponseId"></select>
-                <span asp-validation-for="Call.CallResponseId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Call.SupplierId" class="control-label"></label>
-                <select asp-for="Call.SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
-                <span asp-validation-for="Call.SupplierId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Call</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Call.Id" />
+                <div class="form-group">
+                    <label asp-for="Call.Creator" class="control-label"></label>
+                    <input asp-for="Call.Creator" class="form-control" />
+                    <span asp-validation-for="Call.Creator" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Call.CreateDate" class="control-label"></label>
+                    <input asp-for="Call.CreateDate" class="form-control" />
+                    <span asp-validation-for="Call.CreateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Call.Contact" class="control-label"></label>
+                    <input asp-for="Call.Contact" class="form-control" />
+                    <span asp-validation-for="Call.Contact" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Call.Body" class="control-label"></label>
+                    <input asp-for="Call.Body" class="form-control" />
+                    <span asp-validation-for="Call.Body" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Call.CallResponseId" class="control-label"></label>
+                    <select asp-for="Call.CallResponseId" class="form-control" asp-items="ViewBag.CallResponseId"></select>
+                    <span asp-validation-for="Call.CallResponseId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Call.SupplierId" class="control-label"></label>
+                    <select asp-for="Call.SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                    <span asp-validation-for="Call.SupplierId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>
 </html>
