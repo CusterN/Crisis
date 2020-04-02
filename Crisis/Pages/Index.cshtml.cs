@@ -51,7 +51,7 @@ namespace Crisis
             if (FileAttached != null)
             {
                 // Name the file
-                Attachment.FilePath = Path.Combine(@"S:\6290 Procurement Operations\_Public\Data\Crisis\COVID-19\Attachments",
+                Attachment.FilePath = Path.Combine(@"\\ahmtroy03\sppcsharedfiles\6290 Procurement Operations\_Public\Data\Crisis\COVID-19\Attachments",
                  Attachment.SupplierId + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmsstt") + "_" + FileAttached.FileName);
 
                 // Save the file and update models

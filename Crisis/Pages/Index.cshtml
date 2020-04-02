@@ -52,46 +52,49 @@
         <tbody>
             @foreach (var item in Model.SupplierDetails)
             {
-                <tr>
-                    <td>
-                        <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Supplier.Calls.LastOrDefault().CallResponse.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Supplier.ReopenDate)
-                    </td>
-                    <td hidden>
-                        @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
-                    </td>
-                    <td>
-                        <font size="5">
-                            <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal"  class="fas fa-phone-square"></a>
-                            <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fas fa-comment-alt"></a>
-                            <a style="color:#f0ad4e" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier" asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
-                            <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fas fa-paperclip"></a>
-                        </font>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VwSrmAhmSupplier.AhmSupplierNm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VwSrmDeliveryPrimary.PortalLoginId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.Category.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.Status.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.Calls.LastOrDefault().CallResponse.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.ReopenDate)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
+                </td>
+                <td>
+                    <font size="5">
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal" class="fas fa-phone-square"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fas fa-comment-alt"></a>
+                        <a style="color:#f0ad4e" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier" asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fas fa-paperclip"></a>
+                    </font>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>
 </html>
 <script type="text/javascript">
