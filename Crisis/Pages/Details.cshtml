@@ -164,7 +164,7 @@
                     @Html.DisplayFor(modelItem => item.AttachmentType.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FilePath)
+                    <a href="@Html.DisplayFor(modelItem => item.FilePath)">@Html.DisplayFor(modelItem => item.FilePath)</a>
                 </td>
             </tr>
 }
