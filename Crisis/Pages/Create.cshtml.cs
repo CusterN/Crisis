@@ -23,6 +23,7 @@ namespace Crisis
         {
             ViewData["StatusId"] = new SelectList(_context.Set<Status>(), "Id", "Description");
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Description");
+            ViewData["Escalation"] = new SelectList(_context.Set<Escalation>(), "Id", "Description");
             return Page();
         }
 

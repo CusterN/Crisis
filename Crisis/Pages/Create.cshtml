@@ -49,6 +49,10 @@
                 <textarea asp-for="Comment" class="form-control"></textarea>
                 <span asp-validation-for="Comment" class="text-danger"></span>
             </div>
+            <div hidden class="form-group">
+                <a asp-page="Statuses/Index" style="margin-left:5px;">Status</a>
+                <select asp-for="Supplier.EscalationId" class="form-control" asp-items="ViewBag.Escalation"></select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-success" />
             </div>

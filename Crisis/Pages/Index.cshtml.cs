@@ -42,6 +42,7 @@ namespace Crisis
         {
             ViewData["AttachmentType"] = new SelectList(_context.AttachmentType, "Id", "Description");
             ViewData["CallResponse"] = new SelectList(_context.CallResponse, "Id", "Description");
+            ViewData["Escalation"] = new SelectList(_context.Escalation, "Id", "Description");
             await SetModel();
         }
 

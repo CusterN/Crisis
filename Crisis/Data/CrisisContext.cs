@@ -36,6 +36,8 @@ namespace Crisis.Data
 
         public DbSet<Crisis.Models.AttachmentType> AttachmentType { get; set; }
 
+        public DbSet<Crisis.Models.Escalation> Escalation { get; set; }
+
         
     }
 }

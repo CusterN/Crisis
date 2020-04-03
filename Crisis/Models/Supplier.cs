@@ -22,11 +22,16 @@ namespace Crisis.Models
 
         public List<Attachment> Attachments { get; set; }
 
+
+
         [Required] public int StatusId { get; set; }
         public virtual Status Status { get; set; }
 
         [Required] public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        [Required] public int EscalationId { get; set; }
+        public virtual Escalation Escalation { get; set; }
 
     }
 }
