@@ -46,6 +46,9 @@
                 <th hidden>
                     @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Comments)
                 </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Escalation)
+                </th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -79,6 +82,9 @@
                 </td>
                 <td hidden>
                     @Html.DisplayFor(modelItem => item.Supplier.Comments.LastOrDefault().Body)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Supplier.Escalation.Description)
                 </td>
                 <td>
                     <font size="5">

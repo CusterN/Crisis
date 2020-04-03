@@ -4,14 +4,16 @@ using Crisis.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crisis.Migrations
 {
     [DbContext(typeof(CrisisContext))]
-    partial class CrisisContextModelSnapshot : ModelSnapshot
+    [Migration("20200403021000_AddingEscalation")]
+    partial class AddingEscalation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,7 +246,7 @@ namespace Crisis.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<int>("EscalationId")
+                    b.Property<int?>("EscalationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ReopenDate")
@@ -320,9 +322,7 @@ namespace Crisis.Migrations
 
                     b.HasOne("Crisis.Models.Escalation", "Escalation")
                         .WithMany("Suppliers")
-                        .HasForeignKey("EscalationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EscalationId");
 
                     b.HasOne("Crisis.Models.Status", "Status")
                         .WithMany("Suppliers")

@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20200330164349_AddingAttachmentClass.Designer.cs" />
     <Compile Remove="Migrations\20200330164508_AddingAttachmentClass.cs" />
     <Compile Remove="Migrations\20200330164508_AddingAttachmentClass.Designer.cs" />
+    <Compile Remove="Migrations\20200403020828_AddingEscalation.cs" />
+    <Compile Remove="Migrations\20200403020828_AddingEscalation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

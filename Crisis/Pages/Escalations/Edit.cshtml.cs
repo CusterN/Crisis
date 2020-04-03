@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Crisis.Data;
 using Crisis.Models;
 
-namespace Crisis
+namespace Crisis.Pages.Escalations
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace Crisis
         }
 
         [BindProperty]
-        public Supplier Supplier { get; set; }
+        public Escalation Escalation { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,16 +30,12 @@ namespace Crisis
                 return NotFound();
             }
 
-            Supplier = await _context.Supplier
-                .Include(s => s.Status).FirstOrDefaultAsync(m => m.Id == id);
+            Escalation = await _context.Escalation.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Supplier == null)
+            if (Escalation == null)
             {
                 return NotFound();
             }
-            ViewData["StatusId"] = new SelectList(_context.Set<Status>(), "Id", "Description");
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Description");
-            ViewData["Escalation"] = new SelectList(_context.Set<Escalation>(), "Id", "Description");
             return Page();
         }
 
@@ -52,7 +48,7 @@ namespace Crisis
                 return Page();
             }
 
-            _context.Attach(Supplier).State = EntityState.Modified;
+            _context.Attach(Escalation).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +56,7 @@ namespace Crisis
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SupplierExists(Supplier.Id))
+                if (!EscalationExists(Escalation.Id))
                 {
                     return NotFound();
                 }
@@ -70,12 +66,12 @@ namespace Crisis
                 }
             }
 
-            return RedirectToPage("./Details", new { Supplier.Id });
+            return RedirectToPage("./Index");
         }
 
-        private bool SupplierExists(int id)
+        private bool EscalationExists(int id)
         {
-            return _context.Supplier.Any(e => e.Id == id);
+            return _context.Escalation.Any(e => e.Id == id);
         }
     }
 }

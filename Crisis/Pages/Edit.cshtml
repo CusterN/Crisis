@@ -44,8 +44,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Supplier.ReopenDate" class="control-label"></label>
-                <input asp-for="Supplier.ReopenDate" class="form-control" type="date"/>
+                <input asp-for="Supplier.ReopenDate" class="form-control" type="date" />
                 <span asp-validation-for="Supplier.ReopenDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Supplier.EscalationId" class="control-label"></label>
+                <select asp-for="Supplier.EscalationId" class="form-control" asp-items="ViewBag.Escalation"></select>
+                <span asp-validation-for="Supplier.EscalationId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-warning" />
