@@ -10,6 +10,7 @@ using Crisis.Models;
 
 namespace Crisis
 {
+    [BindProperties]
     public class CreateModel : PageModel
     {
         private readonly Crisis.Data.CrisisContext _context;
@@ -21,15 +22,14 @@ namespace Crisis
 
         public IActionResult OnGet()
         {
-            ViewData["StatusId"] = new SelectList(_context.Set<Status>(), "Id", "Description");
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Description");
+            ViewData["Status"] = new SelectList(_context.Set<Status>(), "Id", "Description");
+            ViewData["Category"] = new SelectList(_context.Set<Category>(), "Id", "Description");
             ViewData["Escalation"] = new SelectList(_context.Set<Escalation>(), "Id", "Description");
             return Page();
         }
 
-        [BindProperty]
+        public string StatusMessage { get; set; }
         public Supplier Supplier { get; set; }
-        [BindProperty]
         public string Comment { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -39,7 +39,7 @@ namespace Crisis
             //Check and make sure all the fields are filled in. Also make sure you aren't adding a duplicate.
             if (!ModelState.IsValid || _context.Supplier.Any(s => s.SupplierNo.Equals(Supplier.SupplierNo)) || Comment is null)
             {
-                return Page();
+                return RedirectToPage("./Index");
             }
 
 
