@@ -1,0 +1,306 @@
+﻿@page
+@model Crisis.Pages.AdminModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin</title>
+</head>
+<body>
+    @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+    <p>
+        Status
+    </p>
+    <table id="StatusTable" class="table table-striped table-bordered" style="width:100%">
+        <colgroup>
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 70%;">
+        </colgroup>
+        <thead>
+
+            <tr>
+                <th>
+                    <font size="5">
+                        <a style="color:#5cb85c" data-toggle="modal" data-object="Status" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>
+                    </font>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Statuses[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Statuses[0].Hint)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Statuses)
+            {
+                <tr>
+                    <td>
+                        <font size="5">
+                            <a data-toggle="modal" data-object="Status" data-target="#OnPostModal" data-id="@item.Id" data-desc="@item.Description" data-hint="@item.Hint" href="#OnPostModal" class="fas fa-edit"></a>
+                        </font>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hint)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        Category
+    </p>
+    <table id="CategoryTable" class="table table-striped table-bordered" style="width:100%">
+        <colgroup>
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 70%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    <font size="5">
+                        <a style="color:#5cb85c" data-toggle="modal" data-object="Category" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>
+                    </font>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categories[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categories[0].Hint)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>
+                        <font size="5">
+                            <a data-toggle="modal" data-object="Category" data-target="#OnPostModal" data-id="@item.Id" data-desc="@item.Description" data-hint="@item.Hint" href="#OnPostModal" class="fas fa-edit"></a>
+                        </font>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hint)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        CallResponse
+    </p>
+    <table id="CallResponseTable" class="table table-striped table-bordered" style="width:100%">
+        <colgroup>
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 70%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    <font size="5">
+                        <a style="color:#5cb85c" data-toggle="modal" data-object="CallResponse" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>
+                    </font>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CallResponses[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CallResponses[0].Hint)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CallResponses)
+            {
+                <tr>
+                    <td>
+                        <font size="5">
+                            <a data-toggle="modal" data-object="CallResponse" data-target="#OnPostModal" data-id="@item.Id" data-desc="@item.Description" data-hint="@item.Hint" href="#OnPostModal" class="fas fa-edit"></a>
+                        </font>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hint)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        AttachmentType
+    </p>
+    <table id="AttachmentTypeTable" class="table table-striped table-bordered" style="width:100%">
+        <colgroup>
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 70%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    <font size="5">
+                        <a style="color:#5cb85c" data-toggle="modal" data-object="AttachmentType" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>
+                    </font>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AttachmentTypes[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AttachmentTypes[0].Hint)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AttachmentTypes)
+            {
+                <tr>
+                    <td>
+                        <font size="5">
+                            <a data-toggle="modal" data-object="AttachmentType" data-target="#OnPostModal" data-id="@item.Id" data-desc="@item.Description" data-hint="@item.Hint" href="#OnPostModal" class="fas fa-edit"></a>
+                        </font>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hint)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        Escalation
+    </p>
+    <table id="EscalationTable" class="table table-striped table-bordered" style="width:100%">
+        <colgroup>
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 70%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    <font size="5">
+                        <a style="color:#5cb85c" data-toggle="modal" data-object="Escalation" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>
+                    </font>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Escalations[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Escalations[0].Hint)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Escalations)
+            {
+                <tr>
+                    <td>
+                        <font size="5">
+                            <a data-toggle="modal" data-object="Escalation" data-target="#OnPostModal" data-id="@item.Id" data-desc="@item.Description" data-hint="@item.Hint" href="#OnPostModal" class="fas fa-edit"></a>
+                        </font>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hint)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    $('a[data-toggle=modal], button[data-toggle=modal]').click(function () {
+        var data_object = '';
+        var data_id = '';
+        var data_desc = '';
+        var data_hint = '';
+
+        if (typeof $(this).data('object') !== 'undefined') {
+            data_object = $(this).data('object');
+        }
+        $('#ObjectType').val(data_object);
+
+        if (typeof $(this).data('id') !== 'undefined') {
+            data_id = $(this).data('id');
+        }
+        $('#Id').val(data_id);
+
+        if (typeof $(this).data('desc') !== 'undefined') {
+            data_desc = $(this).data('desc');
+        }
+        $('#Description').val(data_desc);
+
+        if (typeof $(this).data('hint') !== 'undefined') {
+            data_hint = $(this).data('hint');
+        }
+        $('#Hint').val(data_hint);
+    })
+</script>
+
+<!-- OnPost -->
+<div class="modal fade" id="OnPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add/Update</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ObjectType" class="control-label"></label>
+                        <input asp-for="ObjectType" id="ObjectType" class="form-control" />
+                        <span asp-validation-for="ObjectType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ComboBox.Id" class="control-label"></label>
+                        <input asp-for="ComboBox.Id" id="Id" class="form-control" />
+                        <span asp-validation-for="ComboBox.Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ComboBox.Description" class="control-label"></label>
+                        <input asp-for="ComboBox.Description" id="Description" class="form-control" />
+                        <span asp-validation-for="ComboBox.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ComboBox.Hint" class="control-label"></label>
+                        <textarea asp-for="ComboBox.Hint" id="Hint" class="form-control"></textarea>
+                        <span asp-validation-for="ComboBox.Hint" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" asp-page-handler="OnPost" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

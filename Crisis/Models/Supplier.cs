@@ -14,15 +14,13 @@ namespace Crisis.Models
         [Required][MinLength(6)][MaxLength(6)] public string SupplierNo { get; set; }
         [Required] public DateTime CreateDate { get; set;}
         [Required] [MaxLength(60)] public string Creator { get; set; }
-        public DateTime? ReopenDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")] public DateTime? ReopenDate { get; set; }
         
         public List<Comment> Comments { get; set; }
 
         public List<Call> Calls { get; set; }
 
         public List<Attachment> Attachments { get; set; }
-
-
 
         [Required] public int StatusId { get; set; }
         public virtual Status Status { get; set; }

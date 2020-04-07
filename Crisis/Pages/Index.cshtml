@@ -12,50 +12,74 @@
     <div class="row" style="width:auto">
         <p>
             <a asp-page="Create" class="btn btn-success">Create New</a>
-            <a asp-page="Index" asp-route-all="@true" class="btn btn-dark">Hidden</a>
         </p>
     </div>
     @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
-    <table id="SupplierTable" class="table table-striped table-bordered" style="width:100%">
-        <thead>
+<table id="SupplierTable" class="table table-striped table-bordered" style="width:100%">
+    <colgroup>
+        <col span="1" style="width: 10%;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>
+                <font size="5">
+                    @*<a style="color:#5cb85c" data-toggle="modal" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>*@
+                </font>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.SupplierNo)
+            </th>
+            <th>
+                Supplier Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.CreateDate)
+            </th>
+            <th>
+                Honda Contact
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Calls.LastOrDefault().CallResponse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.ReopenDate)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Comments)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Escalation)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SupplierDetails)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.SupplierNo)
-                </th>
-                <th>
-                    Supplier Name
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.CreateDate)
-                </th>
-                <th>
-                    Honda Contact
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Category)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Calls.LastOrDefault().CallResponse)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.ReopenDate)
-                </th>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Comments)
-                </th>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.SupplierDetails[0].Supplier.Escalation)
-                </th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.SupplierDetails)
-            {
-            <tr>
+                <td>
+                    <font size="5">
+                        <a data-toggle="modal" data-target="#EditModal"
+                           data-id="@item.Supplier.Id"
+                           data-supplierno="@item.Supplier.SupplierNo"
+                           data-createdate="@item.Supplier.CreateDate"
+                           data-creator="@item.Supplier.Creator"
+                           data-reopendate="@item.Supplier.ReopenDate"
+                           data-categoryid="@item.Supplier.CategoryId"
+                           data-statusid="@item.Supplier.StatusId"
+                           data-escalationid="@item.Supplier.EscalationId"
+                           href="#EditModal" class="fas fa-edit">
+                        </a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal" class="fas fa-phone-square"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fas fa-comment-alt"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fas fa-paperclip"></a>
+                    </font>
+                </td>
                 <td>
                     <a asp-page="./Details" asp-route-id="@item.Supplier.Id">@Html.DisplayFor(modelItem => item.Supplier.SupplierNo)</a>
                 </td>
@@ -86,18 +110,11 @@
                 <td hidden>
                     @Html.DisplayFor(modelItem => item.Supplier.Escalation.Description)
                 </td>
-                <td>
-                    <font size="5">
-                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal" class="fas fa-phone-square"></a>
-                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fas fa-comment-alt"></a>
-                        <a style="color:#f0ad4e" asp-page="Edit" data-toggle="tooltip" data-placement="top" title="Edit the supplier" asp-route-id="@item.Supplier.Id" class="fas fa-edit"></a>
-                        <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fas fa-paperclip"></a>
-                    </font>
-                </td>
+
             </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
@@ -120,16 +137,132 @@
 
     $('a[data-toggle=modal], button[data-toggle=modal]').click(function () {
         var data_id = '';
+        var data_supplierno = '';
+        var data_createdate = '';
+        var strcrdt = '';
+        var data_creator = '';
+        var data_reopendate = '';
+        var strrodt = '';
+        var data_categoryid = '';
+        var data_statusid = '';
+        var data_escalationid = '';
+
         if (typeof $(this).data('id') !== 'undefined') {
             data_id = $(this).data('id');
         }
+        if (typeof $(this).data('supplierno') !== 'undefined') {
+            data_supplierno = $(this).data('supplierno');
+        }
+        if (typeof $(this).data('createdate') !== 'undefined') {
+            if ($(this).data('createdate') !== '') {
+                data_createdate = $(this).data('createdate');
+                var crdt = new Date(data_createdate);
+                crdt.setHours(crdt.getHours() - 4);
+                strcrdt = crdt.toISOString().substr(0, 17) + '00';
+            }
+        }
+        if (typeof $(this).data('creator') !== 'undefined') {
+            data_creator = $(this).data('creator');
+        }
+        if (typeof $(this).data('reopendate') !== 'undefined') {
+            if ($(this).data('reopendate') !== '') {
+                data_reopendate = $(this).data('reopendate');
+                var rodt = new Date(data_reopendate);
+                rodt.setHours(rodt.getHours() - 4);
+                strrodt = rodt.toISOString().substr(0, 10);
+            }
+        }
+        if (typeof $(this).data('categoryid') !== 'undefined') {
+            data_categoryid = $(this).data('categoryid');
+        }
+        if (typeof $(this).data('statusid') !== 'undefined') {
+            data_statusid = $(this).data('statusid');
+        }
+        if (typeof $(this).data('escalationid') !== 'undefined') {
+            data_escalationid = $(this).data('escalationid');
+        }
+
         $('#AttachmentSupplier').val(data_id);
         $('#CallSupplier').val(data_id);
         $('#CommentSupplier').val(data_id);
+
+        $('#Id').val(data_id);
+        $('#SupplierNo').val(data_supplierno);
+
+        $('#createdate').val(strcrdt);
+        
+        $('#creator').val(data_creator);
+        $('#reopendate').val(strrodt);
+        $('#categoryid').val(data_categoryid);
+        $('#StatusId').val(data_statusid);
+        $('#escalationid').val(data_escalationid);
+
     })
 
 </script>
 
+
+<!-- OnPost -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Attachment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div hidden>
+                        <input id="Id" asp-for="Supplier.Id" />
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Supplier.SupplierNo" class="control-label"></label>
+                        <input asp-for="Supplier.SupplierNo" id="SupplierNo" class="form-control" />
+                        <span asp-validation-for="Supplier.SupplierNo" class="text-danger"></span>
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Supplier.CreateDate" class="control-label"></label>
+                        <input asp-for="Supplier.CreateDate" id="createdate" class="form-control" />
+                        <span asp-validation-for="Supplier.CreateDate" class="text-danger"></span>
+                    </div>
+                    <div hidden class="form-group">
+                        <label asp-for="Supplier.Creator" class="control-label"></label>
+                        <input asp-for="Supplier.Creator" id="creator" class="form-control" />
+                        <span asp-validation-for="Supplier.Creator" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.CategoryId" class="control-label"></label>
+                        <select asp-for="Supplier.CategoryId" id="categoryid" class="form-control" asp-items="ViewBag.Category"></select>
+                        <span asp-validation-for="Supplier.CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.StatusId" class="control-label"></label>
+                        <select asp-for="Supplier.StatusId" id="StatusId" class="form-control" asp-items="ViewBag.Status"></select>
+                        <span asp-validation-for="Supplier.StatusId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.ReopenDate" class="control-label"></label>
+                        <input asp-for="Supplier.ReopenDate" id="reopendate" type="date" class="form-control" />
+                        <span asp-validation-for="Supplier.ReopenDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.EscalationId" class="control-label"></label>
+                        <select asp-for="Supplier.EscalationId" id="escalationid" class="form-control" asp-items="ViewBag.Escalation"></select>
+                        <span asp-validation-for="Supplier.EscalationId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-warning" asp-page-handler="Edit" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 <!-- AddAttachment -->
 <div class="modal fade" id="AttachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -251,7 +384,7 @@
                         <span asp-validation-for="Call.SupplierId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" asp-page-handler="CreateCall"  class="btn btn-success" />
+                        <input type="submit" value="Create" asp-page-handler="CreateCall" class="btn btn-success" />
                     </div>
                 </form>
             </div>

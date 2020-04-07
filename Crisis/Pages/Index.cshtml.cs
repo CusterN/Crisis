@@ -32,18 +32,49 @@ namespace Crisis
         //Attachment Fields
         public Attachment Attachment { get; set; }
         public IFormFile FileAttached { get; set; }
-        //Comment
+
+        public Supplier Supplier { get; set; }
         public Comment Comment { get; set; }
-        //Call
         public Call Call { get; set; }
         
 
         public async Task OnGetAsync()
         {
+            ViewData["Status"] = new SelectList(_context.Status, "Id", "Description");
+            ViewData["Category"] = new SelectList(_context.Category, "Id", "Description");
             ViewData["AttachmentType"] = new SelectList(_context.AttachmentType, "Id", "Description");
             ViewData["CallResponse"] = new SelectList(_context.CallResponse, "Id", "Description");
             ViewData["Escalation"] = new SelectList(_context.Escalation, "Id", "Description");
+
             await SetModel();
+        }
+
+        public async Task OnPostEditAsync()
+        {
+            Supplier ExistingRecord = await _context.Supplier.FirstOrDefaultAsync(m => m.Id == Supplier.Id);
+
+            if (ExistingRecord == null)
+            {
+                //If the supplier doesn't exist I want to add it, but this isn't working quite yet.
+                //_context.Supplier.Add(Supplier);
+
+            }
+            else
+            {
+                ExistingRecord.SupplierNo = Supplier.SupplierNo;
+                ExistingRecord.CreateDate = Supplier.CreateDate;
+                ExistingRecord.Creator = Supplier.Creator;
+                ExistingRecord.ReopenDate = Supplier.ReopenDate;
+                ExistingRecord.StatusId = Supplier.StatusId;
+                ExistingRecord.CategoryId = Supplier.CategoryId;
+                ExistingRecord.EscalationId = Supplier.EscalationId;
+
+                _context.Attach(ExistingRecord).State = EntityState.Modified;
+            }
+            await _context.SaveChangesAsync();
+            StatusMessage = "Saved!";
+            await OnGetAsync();
+
         }
 
         public async Task OnPostCreateAttachment()
@@ -119,6 +150,7 @@ namespace Crisis
                 .Include(s => s.Comments)
                 .Include(s => s.Calls)
                 .Include("Calls.CallResponse")
+                .Include(s => s.Escalation)
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
 
