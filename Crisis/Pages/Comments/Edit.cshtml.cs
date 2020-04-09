@@ -68,7 +68,7 @@ namespace Crisis.Pages.Comments
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
 
         private bool CommentExists(int id)
