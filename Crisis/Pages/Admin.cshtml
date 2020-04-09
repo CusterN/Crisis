@@ -274,12 +274,12 @@
             <div class="modal-body">
                 <form method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
+                    <div hidden class="form-group">
                         <label asp-for="ObjectType" class="control-label"></label>
                         <input asp-for="ObjectType" id="ObjectType" class="form-control" />
                         <span asp-validation-for="ObjectType" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div hidden class="form-group">
                         <label asp-for="ComboBox.Id" class="control-label"></label>
                         <input asp-for="ComboBox.Id" id="Id" class="form-control" />
                         <span asp-validation-for="ComboBox.Id" class="text-danger"></span>
