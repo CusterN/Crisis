@@ -18,7 +18,7 @@
         <tr>
             <th>
                 <font size="5">
-                    <a style="color:#5cb85c; font-size:30px" asp-page="Create" class="fas fa-plus-circle"></a>
+                    <a style="color:#5cb85c; font-size:30px" asp-page="Create" class="fa fas fa-plus-circle"></a>
                     @*<a style="color:#5cb85c" data-toggle="modal" data-target="#OnPostModal" href="#OnPostModal" class="fas fa-plus-circle"></a>*@
                 </font>
             </th>
@@ -69,11 +69,11 @@
                            data-categoryid="@item.Supplier.CategoryId"
                            data-statusid="@item.Supplier.StatusId"
                            data-escalationid="@item.Supplier.EscalationId"
-                           href="#EditModal" class="fas fa-edit">
+                           href="#EditModal" class="fa fas fa-edit">
                         </a>
-                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal" class="fas fa-phone-square"></a>
-                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fas fa-comment-alt"></a>
-                        <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fas fa-paperclip"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CallModal" data-id="@item.Supplier.Id" href="#CallModal" class="fa fas fa-phone-square"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#CommentModal" data-id="@item.Supplier.Id" href="#CommentModal" class="fa fas fa-comment-alt"></a>
+                        <a style="color:#5cb85c" data-toggle="modal" data-target="#AttachmentModal" data-id="@item.Supplier.Id" href="#AttachmentModal" class="fa fas fa-paperclip"></a>
                     </font>
                 </td>
                 <td>
@@ -200,8 +200,12 @@
         }
 
         $('#AttachmentSupplier').val(data_id);
+        $('#attachmentbody').val('');
         $('#CallSupplier').val(data_id);
+        $('#callcontact').val('');
+        $('#callbody').val('');
         $('#CommentSupplier').val(data_id);
+        $('#commentbody').val('');
 
         $('#Id').val(data_id);
         $('#SupplierNo').val(data_supplierno);
@@ -213,6 +217,8 @@
         $('#categoryid').val(data_categoryid);
         $('#StatusId').val(data_statusid);
         $('#escalationid').val(data_escalationid);
+
+
 
     })
 
@@ -301,7 +307,7 @@
                         <select asp-for="Attachment.AttachmentTypeId" class="form-control" asp-items="ViewBag.AttachmentType"></select>
                     </div>
                     <div class="form-group">
-                        <input type="file" asp-for="FileAttached" class="form-control" />
+                        <input type="file" id="attachmentbody" asp-for="FileAttached" class="form-control" />
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary" asp-page-handler="CreateAttachment" />
@@ -343,7 +349,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Comment.Body" class="control-label"></label>
-                        <textarea asp-for="Comment.Body" class="form-control"></textarea>
+                        <textarea asp-for="Comment.Body" id="commentbody" class="form-control"></textarea>
                         <span asp-validation-for="Comment.Body" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -381,12 +387,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Call.Contact" class="control-label"></label>
-                        <input asp-for="Call.Contact" class="form-control" />
+                        <input asp-for="Call.Contact" id="callcontact" class="form-control" />
                         <span asp-validation-for="Call.Contact" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Call.Body" class="control-label"></label>
-                        <textarea asp-for="Call.Body" class="form-control"></textarea>
+                        <textarea asp-for="Call.Body" id="callbody"class="form-control"></textarea>
                         <span asp-validation-for="Call.Body" class="text-danger"></span>
                     </div>
                     <div class="form-group">
